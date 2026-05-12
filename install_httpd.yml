@@ -1,15 +1,20 @@
 ---
-- name: Install Apache using Ansible
+- name: Simple Ansible POC
   hosts: all
   become: false
 
   tasks:
 
-    - name: Install httpd package
-      shell: dnf install -y httpd
+    - name: Create a test file
+      file:
+        path: /tmp/ansible_demo.txt
+        state: touch
 
-    - name: Start httpd service
-      shell: systemctl start httpd
+    - name: Write content to file
+      copy:
+        content: "Hello from Ansible Automation Platform"
+        dest: /tmp/ansible_demo.txt
 
-    - name: Enable httpd service
-      shell: systemctl enable httpd
+    - name: Display message
+      debug:
+        msg: "POC executed successfully!"
