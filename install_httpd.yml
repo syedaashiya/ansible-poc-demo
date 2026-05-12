@@ -6,16 +6,10 @@
   tasks:
 
     - name: Install httpd package
-      package:
-        name: httpd
-        state: present
+      shell: dnf install -y httpd
 
     - name: Start httpd service
-      service:
-        name: httpd
-        state: started
+      shell: systemctl start httpd
 
     - name: Enable httpd service
-      service:
-        name: httpd
-        enabled: true
+      shell: systemctl enable httpd
