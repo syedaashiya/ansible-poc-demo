@@ -1,0 +1,21 @@
+---
+- name: Install Apache using Ansible
+  hosts: all
+  become: false
+
+  tasks:
+
+    - name: Install httpd package
+      package:
+        name: httpd
+        state: present
+
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+
+    - name: Enable httpd service
+      service:
+        name: httpd
+        enabled: true
