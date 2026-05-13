@@ -1,0 +1,36 @@
+---
+- name: AppWorx Agent Automation (POC)
+  hosts: all
+  become: false
+
+  vars:
+    action: "{{ action | default('status') }}"
+
+  tasks:
+
+    - name: Show requested action
+      debug:
+        msg: "Requested Action is {{ action }}"
+
+    - name: Simulate checking agent status
+      debug:
+        msg: "Executing awstat command - Agent is running"
+
+    - name: Simulate stop agent
+      debug:
+        msg: "Executing stopso all - Agent Stopped"
+      when: action == "stop"
+
+    - name: Simulate start agent
+      debug:
+        msg: "Executing startso agentservice - Agent Started"
+      when: action == "start"
+
+    - name: Simulate SSHD stop
+      debug:
+        msg: "Executing stopso sshdserver"
+      when: action == "stop"
+
+    - name: Final validation
+      debug:
+        msg: "Agent operation completed successfully ✅"
